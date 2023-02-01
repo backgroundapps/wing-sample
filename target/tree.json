@@ -1,0 +1,206 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "root",
+    "path": "root",
+    "children": {
+      "WingLogger": {
+        "id": "WingLogger",
+        "path": "root/WingLogger",
+        "attributes": {
+          "wing:resource:stateful": true,
+          "wing:resource:connections": [
+            {
+              "direction": "inbound",
+              "relationship": "print",
+              "resource": "root/cloud.Queue-OnMessage-de95ec56",
+              "implicit": true
+            }
+          ]
+        },
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.237"
+        },
+        "display": {
+          "title": "Logger",
+          "description": "A cloud logging facility",
+          "hidden": true
+        }
+      },
+      "cloud.Bucket": {
+        "id": "cloud.Bucket",
+        "path": "root/cloud.Bucket",
+        "attributes": {
+          "wing:resource:stateful": true,
+          "wing:resource:connections": [
+            {
+              "direction": "inbound",
+              "relationship": "delete",
+              "resource": "root/cloud.Queue-OnMessage-de95ec56",
+              "implicit": false
+            },
+            {
+              "direction": "inbound",
+              "relationship": "get",
+              "resource": "root/cloud.Queue-OnMessage-de95ec56",
+              "implicit": false
+            },
+            {
+              "direction": "inbound",
+              "relationship": "list",
+              "resource": "root/cloud.Queue-OnMessage-de95ec56",
+              "implicit": false
+            },
+            {
+              "direction": "inbound",
+              "relationship": "put",
+              "resource": "root/cloud.Queue-OnMessage-de95ec56",
+              "implicit": false
+            }
+          ]
+        },
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.237"
+        },
+        "display": {
+          "title": "Bucket",
+          "description": "A cloud object store"
+        }
+      },
+      "cloud.Queue": {
+        "id": "cloud.Queue",
+        "path": "root/cloud.Queue",
+        "attributes": {
+          "wing:resource:stateful": true,
+          "wing:resource:connections": [
+            {
+              "direction": "outbound",
+              "relationship": "on_message",
+              "resource": "root/cloud.Queue-OnMessage-de95ec56",
+              "implicit": false
+            }
+          ]
+        },
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.237"
+        },
+        "display": {
+          "title": "Queue",
+          "description": "A distributed message queue"
+        }
+      },
+      "$Inflight1": {
+        "id": "$Inflight1",
+        "path": "root/$Inflight1",
+        "attributes": {
+          "wing:resource:stateful": false,
+          "wing:resource:connections": [
+            {
+              "direction": "inbound",
+              "relationship": "handle",
+              "resource": "root/cloud.Queue-OnMessage-de95ec56",
+              "implicit": false
+            }
+          ]
+        },
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.237"
+        },
+        "display": {
+          "title": "Inflight",
+          "description": "An inflight resource",
+          "hidden": true
+        }
+      },
+      "cloud.Queue-OnMessageHandler-de95ec56": {
+        "id": "cloud.Queue-OnMessageHandler-de95ec56",
+        "path": "root/cloud.Queue-OnMessageHandler-de95ec56",
+        "attributes": {
+          "wing:resource:stateful": false,
+          "wing:resource:connections": []
+        },
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.237"
+        }
+      },
+      "cloud.Queue-OnMessage-de95ec56": {
+        "id": "cloud.Queue-OnMessage-de95ec56",
+        "path": "root/cloud.Queue-OnMessage-de95ec56",
+        "children": {
+          "Code": {
+            "id": "Code",
+            "path": "root/cloud.Queue-OnMessage-de95ec56/Code",
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.237"
+            }
+          }
+        },
+        "attributes": {
+          "wing:resource:stateful": false,
+          "wing:resource:connections": [
+            {
+              "direction": "outbound",
+              "relationship": "delete",
+              "resource": "root/cloud.Bucket",
+              "implicit": false
+            },
+            {
+              "direction": "outbound",
+              "relationship": "get",
+              "resource": "root/cloud.Bucket",
+              "implicit": false
+            },
+            {
+              "direction": "outbound",
+              "relationship": "list",
+              "resource": "root/cloud.Bucket",
+              "implicit": false
+            },
+            {
+              "direction": "outbound",
+              "relationship": "put",
+              "resource": "root/cloud.Bucket",
+              "implicit": false
+            },
+            {
+              "direction": "outbound",
+              "relationship": "handle",
+              "resource": "root/$Inflight1",
+              "implicit": false
+            },
+            {
+              "direction": "outbound",
+              "relationship": "print",
+              "resource": "root/WingLogger",
+              "implicit": true
+            },
+            {
+              "direction": "inbound",
+              "relationship": "on_message",
+              "resource": "root/cloud.Queue",
+              "implicit": false
+            }
+          ]
+        },
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.237"
+        },
+        "display": {
+          "title": "Function",
+          "description": "A cloud function (FaaS)"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "constructs.Construct",
+      "version": "10.1.237"
+    }
+  }
+}

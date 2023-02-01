@@ -1,4 +1,4 @@
 image:
   file: .gitpod.Dockerfile
 tasks:
-  - init: npm install -g winglang
+  - init: npm install -g winglang && npm i @winglang/sdk
